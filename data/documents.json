@@ -1,17 +1,287 @@
 [
-  {"source": "物信学院", "title": "物信学院2026届推免工作实施细则", "url": "https://phys.lcu.edu.cn", "tags": ["保研", "政策"], "date": "2025-09-01"},
-  {"source": "物理科学与信息工程学院", "title": "物信学院2025届毕业生保研去向：北邮、西电、山师等", "url": "https://phys.lcu.edu.cn", "tags": ["保研", "考研"], "date": "2025-07-10"},
-  {"source": "研究生招生网", "title": "聊城大学2027年接收推荐免试研究生章程", "url": "https://yz.lcu.edu.cn", "tags": ["保研", "政策"], "date": "2026-09-15"},
-  {"source": "研究生招生网", "title": "聊城大学2025年硕士研究生招生简章及专业目录", "url": "https://yz.lcu.edu.cn", "tags": ["考研", "政策"], "date": "2024-09-20"},
-  {"source": "研究生招生网", "title": "2025年硕士研究生复试录取工作方案（复试比例150%）", "url": "https://yz.lcu.edu.cn", "tags": ["考研", "政策"], "date": "2025-03-18"},
-  {"source": "研究生招生网", "title": "硕士研究生招生初试加分政策说明", "url": "https://yz.lcu.edu.cn", "tags": ["考研", "政策"], "date": "2024-10-08"},
-  {"source": "聊城大学新闻网", "title": "聊城大学2024版学科竞赛目录发布：共192项赛事", "url": "https://news.lcu.edu.cn", "tags": ["竞赛", "政策"], "date": "2024-04-22"},
-  {"source": "聊城大学新闻网", "title": "物信学院学子在全国大学生电子设计竞赛获国家级二等奖", "url": "https://news.lcu.edu.cn", "tags": ["竞赛"], "date": "2023-12-05"},
-  {"source": "聊城大学新闻网", "title": "第十八届“挑战杯”聊城大学实现特等奖突破", "url": "https://news.lcu.edu.cn", "tags": ["竞赛"], "date": "2023-11-02"},
-  {"source": "教务处", "title": "关于做好本科生学业预警工作的通知", "url": "https://jwc.lcu.edu.cn", "tags": ["考试", "政策"], "date": "2024-09-12"},
-  {"source": "教务处", "title": "本科生选课管理细则：每学期上限30学分下限18学分", "url": "https://jwc.lcu.edu.cn", "tags": ["考试", "政策"], "date": "2024-06-20"},
-  {"source": "教务处", "title": "本科毕业论文（设计）管理系统使用通知", "url": "https://jwc.lcu.edu.cn", "tags": ["考试"], "date": "2024-11-01"},
-  {"source": "信息公开网", "title": "聊城大学“优师计划”推免专项：2026年推荐名额40人", "url": "https://xxgk.lcu.edu.cn", "tags": ["保研", "政策"], "date": "2025-09-08"},
-  {"source": "信息公开网", "title": "聊城大学大学生学科竞赛活动管理办法", "url": "https://xxgk.lcu.edu.cn", "tags": ["竞赛", "政策"], "date": "2024-03-15"},
-  {"source": "创新创业学院", "title": "关于举办“青软杯”大学生电子科技创新大赛的通知", "url": "https://cxcy.lcu.edu.cn", "tags": ["竞赛"], "date": "2025-10-01"}
+  {
+    "source": "研究生招生网",
+    "title": "山东省教育招生考试院",
+    "url": "https://www.sdzk.cn/",
+    "tags": [
+      "考试"
+    ],
+    "date": "2026-10-06"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2027年硕士研究生招生章程2026-09-30",
+    "url": "https://yz.lcu.edu.cn/zsdt/7c10d88ebc984cebbd66e5c0d97206b3.htm",
+    "tags": [
+      "政策"
+    ],
+    "date": "2026-09-30"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2027年接收推荐免试攻读硕士学位研究生工作办法2026-09-17",
+    "url": "https://yz.lcu.edu.cn/zsdt/f837e7e9c5204adba887715a6166e654.htm",
+    "tags": [
+      "保研"
+    ],
+    "date": "2026-09-17"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2027年接收推荐免试研究生章程",
+    "url": "https://yz.lcu.edu.cn",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2026-09-15"
+  },
+  {
+    "source": "物信学院",
+    "title": "我校承办全国大学生物理实验竞赛",
+    "url": "https://www.lcu.edu.cn/ztzx/ldyw/b0f979215350462fb0237db61491bc54.htm",
+    "tags": [
+      "竞赛"
+    ],
+    "date": "2026-08-18"
+  },
+  {
+    "source": "物信学院",
+    "title": "学院承办山东省大学生物理创新大赛教学能力竞赛",
+    "url": "https://phys.lcu.edu.cn/xwzx/zxdt/2655bf2b541e4c9eb0b98c319bdd6d22.htm",
+    "tags": [
+      "竞赛"
+    ],
+    "date": "2026-06-07"
+  },
+  {
+    "source": "创新创业学院",
+    "title": "关于举办“青软杯”大学生电子科技创新大赛的通知",
+    "url": "https://cxcy.lcu.edu.cn",
+    "tags": [
+      "竞赛"
+    ],
+    "date": "2025-10-01"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2026年硕士研究生招生章程2025-09-30",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/629046.htm",
+    "tags": [
+      "政策"
+    ],
+    "date": "2025-09-30"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2026年接收推荐免试攻读硕士学位研究生章程2025-09-16",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/626350.htm",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2025-09-16"
+  },
+  {
+    "source": "信息公开网",
+    "title": "聊城大学“优师计划”推免专项：2026年推荐名额40人",
+    "url": "https://xxgk.lcu.edu.cn",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2025-09-08"
+  },
+  {
+    "source": "物信学院",
+    "title": "物信学院2026届推免工作实施细则",
+    "url": "https://phys.lcu.edu.cn",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2025-09-01"
+  },
+  {
+    "source": "物理科学与信息工程学院",
+    "title": "物信学院2025届毕业生保研去向：北邮、西电、山师等",
+    "url": "https://phys.lcu.edu.cn",
+    "tags": [
+      "保研",
+      "考研"
+    ],
+    "date": "2025-07-10"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "2025年硕士研究生复试录取工作方案（复试比例150%）",
+    "url": "https://yz.lcu.edu.cn",
+    "tags": [
+      "考研",
+      "政策"
+    ],
+    "date": "2025-03-18"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2025年硕士研究生招生考试（初试）符合加分政策考生信息公示2025-03-07",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/msgs/595363.htm",
+    "tags": [
+      "考研",
+      "考试"
+    ],
+    "date": "2025-03-07"
+  },
+  {
+    "source": "教务处",
+    "title": "本科毕业论文（设计）管理系统使用通知",
+    "url": "https://jwc.lcu.edu.cn",
+    "tags": [
+      "考试"
+    ],
+    "date": "2024-11-01"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "硕士研究生招生初试加分政策说明",
+    "url": "https://yz.lcu.edu.cn",
+    "tags": [
+      "考研",
+      "政策"
+    ],
+    "date": "2024-10-08"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2025年硕士研究生招生章程2024-10-02",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/569266.htm",
+    "tags": [
+      "政策"
+    ],
+    "date": "2024-10-02"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2025年接收推荐免试攻读硕士学位研究生章程2024-09-23",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/568315.htm",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2024-09-23"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2025年硕士研究生招生简章及专业目录",
+    "url": "https://yz.lcu.edu.cn",
+    "tags": [
+      "考研",
+      "政策"
+    ],
+    "date": "2024-09-20"
+  },
+  {
+    "source": "教务处",
+    "title": "关于做好本科生学业预警工作的通知",
+    "url": "https://jwc.lcu.edu.cn",
+    "tags": [
+      "考试",
+      "政策"
+    ],
+    "date": "2024-09-12"
+  },
+  {
+    "source": "教务处",
+    "title": "本科生选课管理细则：每学期上限30学分下限18学分",
+    "url": "https://jwc.lcu.edu.cn",
+    "tags": [
+      "考试",
+      "政策"
+    ],
+    "date": "2024-06-20"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2024年硕士研究生复试录取工作圆满结束2024-05-22",
+    "url": "https://yz.lcu.edu.cn/zsdt/556641.htm",
+    "tags": [
+      "考研"
+    ],
+    "date": "2024-05-22"
+  },
+  {
+    "source": "聊城大学新闻网",
+    "title": "聊城大学2024版学科竞赛目录发布：共192项赛事",
+    "url": "https://news.lcu.edu.cn",
+    "tags": [
+      "竞赛",
+      "政策"
+    ],
+    "date": "2024-04-22"
+  },
+  {
+    "source": "信息公开网",
+    "title": "聊城大学大学生学科竞赛活动管理办法",
+    "url": "https://xxgk.lcu.edu.cn",
+    "tags": [
+      "竞赛",
+      "政策"
+    ],
+    "date": "2024-03-15"
+  },
+  {
+    "source": "聊城大学新闻网",
+    "title": "物信学院学子在全国大学生电子设计竞赛获国家级二等奖",
+    "url": "https://news.lcu.edu.cn",
+    "tags": [
+      "竞赛"
+    ],
+    "date": "2023-12-05"
+  },
+  {
+    "source": "聊城大学新闻网",
+    "title": "第十八届“挑战杯”聊城大学实现特等奖突破",
+    "url": "https://news.lcu.edu.cn",
+    "tags": [
+      "竞赛"
+    ],
+    "date": "2023-11-02"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "2024年全国硕士研究生招生考试聊城大学报考点公告2023-09-23",
+    "url": "https://yz.lcu.edu.cn/zsdt/tzgg/525254.htm",
+    "tags": [
+      "考试"
+    ],
+    "date": "2023-09-23"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2024年硕士研究生招生简章2023-09-21",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/524943.htm",
+    "tags": [
+      "考研"
+    ],
+    "date": "2023-09-21"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "聊城大学2024年接收推荐免试攻读硕士学位研究生章程2023-09-21",
+    "url": "https://yz.lcu.edu.cn/zsdt/xxgk/zsjz/524941.htm",
+    "tags": [
+      "保研",
+      "政策"
+    ],
+    "date": "2023-09-21"
+  },
+  {
+    "source": "研究生招生网",
+    "title": "关于2023级拟录取硕士研究生办理相关手续的说明2023-05-06",
+    "url": "https://yz.lcu.edu.cn/zsdt/tzgg/524662.htm",
+    "tags": [
+      "考研"
+    ],
+    "date": "2023-05-06"
+  }
 ]
