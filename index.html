@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>聊城大学 · 电子信息工程 学业助手</title>
+<style>
+:root{
+  --primary:#1a5c9e;--primary-light:#e8f0fa;--accent:#e8a020;
+  --bg:#f5f7fa;--card:#fff;--text:#1e2a3a;--text-light:#5a6b7e;
+  --border:#dce4ee;--radius:12px;--shadow:0 2px 12px rgba(26,92,158,.08);
+  --ease:cubic-bezier(.22,.68,.35,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background:var(--bg);color:var(--text);line-height:1.7;font-size:15px;
+  animation:bodyIn .5s var(--ease) both}
+@keyframes bodyIn{from{opacity:0}to{opacity:1}}
+header{background:linear-gradient(135deg,#1a5c9e,#2b7cc9);color:#fff;padding:26px 20px 20px;text-align:center;
+  position:relative;overflow:hidden}
+header::after{content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 20% 0%,rgba(255,255,255,.16),transparent 55%);
+  pointer-events:none}
+header h1{font-size:21px;font-weight:700;animation:headerIn .6s var(--ease) both}
+header p{font-size:13px;opacity:.85;margin-top:5px;animation:headerIn .6s .08s var(--ease) both}
+@keyframes headerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+nav{background:var(--card);border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:100;overflow-x:auto;white-space:nowrap;
+  -webkit-overflow-scrolling:touch;box-shadow:0 1px 6px rgba(0,0,0,.04);
+  scrollbar-width:none}
+nav::-webkit-scrollbar{height:0}
+nav a{display:inline-block;padding:13px 17px;font-size:14px;color:var(--text-light);text-decoration:none;
+  font-weight:500;position:relative;z-index:1;transition:color .25s var(--ease),transform .25s var(--ease);
+  cursor:pointer}
+nav a:hover{color:var(--primary);transform:translateY(-1px)}
+nav a.active{color:var(--primary);font-weight:600}
+.nav-indicator{position:absolute;bottom:0;left:0;height:3px;width:0;
+  background:var(--primary);border-radius:3px 3px 0 0;pointer-events:none;
+  transition:left .38s var(--ease),width .38s var(--ease)}
+main{max-width:960px;margin:0 auto;padding:22px 16px 60px}
+.page{display:none;opacity:0}
+.page.active{display:block;opacity:1}
+.page.leaving{animation:pageOut .16s ease forwards;display:block}
+.page.entering{animation:pageIn .42s var(--ease) forwards}
+@keyframes pageOut{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-6px)}}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.card{background:var(--card);border-radius:var(--radius);padding:20px 18px;margin-bottom:16px;
+  box-shadow:var(--shadow);border:1px solid var(--border);
+  transition:box-shadow .3s var(--ease),transform .3s var(--ease),border-color .3s var(--ease)}
+.card:hover{box-shadow:0 6px 22px rgba(26,92,158,.1);border-color:#c8dcf0}
+.page.entering .card{animation:cardIn .5s var(--ease) backwards}
+.page.entering .card:nth-child(1){animation-delay:.05s}
+.page.entering .card:nth-child(2){animation-delay:.1s}
+.page.entering .card:nth-child(3){animation-delay:.15s}
+.page.entering .card:nth-child(4){animation-delay:.2s}
+.page.entering .card:nth-child(5){animation-delay:.25s}
+.page.entering .card:nth-child(6){animation-delay:.3s}
+@keyframes cardIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.card h2{font-size:16.5px;color:var(--primary);margin-bottom:13px;padding-bottom:9px;
+  border-bottom:2px solid var(--primary-light);display:flex;align-items:center;gap:8px}
+.card h2 .icon{width:28px;height:28px;background:var(--primary-light);border-radius:8px;
+  display:inline-flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;
+  transition:transform .35s var(--ease),background .3s var(--ease)}
+.card:hover h2 .icon{transform:scale(1.08) rotate(-4deg);background:#d6e6f8}
+.card h3{font-size:14.5px;color:var(--primary);margin:15px 0 8px;font-weight:600}
+.card h3:first-of-type{margin-top:0}
+.info-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px;margin-top:8px}
+.info-item{background:var(--primary-light);border-radius:10px;padding:13px 15px;
+  transition:transform .25s var(--ease),background .25s var(--ease),box-shadow .25s var(--ease)}
+.info-item:hover{transform:translateY(-2px);background:#dbeafb;box-shadow:0 4px 12px rgba(26,92,158,.12)}
+.info-item .label{font-size:12px;color:var(--text-light);margin-bottom:3px}
+.info-item .value{font-size:14.5px;font-weight:600;color:var(--primary)}
+.timeline{position:relative;padding-left:26px}
+.timeline::before{content:'';position:absolute;left:8px;top:6px;bottom:6px;width:2px;
+  background:linear-gradient(180deg,var(--primary),#8ab8e8);border-radius:2px}
+.tl-item{position:relative;margin-bottom:20px}
+.tl-item:last-child{margin-bottom:0}
+.tl-item::before{content:'';position:absolute;left:-22px;top:6px;width:10px;height:10px;border-radius:50%;
+  background:var(--primary);border:2px solid #fff;box-shadow:0 0 0 2px var(--primary);
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.tl-item:hover::before{transform:scale(1.35);box-shadow:0 0 0 4px rgba(26,92,158,.18)}
+.tl-item .year{font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.tl-item .desc{font-size:14px}
+.tag{display:inline-block;padding:2px 10px;border-radius:20px;font-size:12px;font-weight:500;margin:2px 4px 2px 0;
+  transition:transform .2s var(--ease),filter .2s var(--ease)}
+.tag:hover{transform:translateY(-1px);filter:brightness(.96)}
+.tag-blue{background:#e0edfb;color:#1a5c9e}
+.tag-green{background:#e3f5e8;color:#1e7a3e}
+.tag-orange{background:#fef3e0;color:#b06a10}
+.tag-red{background:#fde8e8;color:#b03030}
+.tag-purple{background:#efe8fd;color:#6a3fb5}
+ul.check{list-style:none}
+ul.check li{padding:5px 0 5px 24px;position:relative;font-size:14px;
+  transition:transform .2s var(--ease)}
+ul.check li:hover{transform:translateX(3px)}
+ul.check li::before{content:'✓';position:absolute;left:0;top:5px;color:var(--primary);font-weight:700}
+.note{background:#fffbea;border-left:4px solid var(--accent);padding:11px 15px;
+  border-radius:0 8px 8px 0;font-size:13px;color:#7a5a10;margin:11px 0;
+  transition:transform .25s var(--ease)}
+.note:hover{transform:translateX(3px)}
+.note strong{color:#b06a10}
+.table-wrap{overflow-x:auto;margin-top:10px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:480px}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);
+  transition:background .2s ease}
+th{background:var(--primary-light);color:var(--primary);font-weight:600;white-space:nowrap}
+tbody tr{transition:transform .2s var(--ease)}
+tbody tr:hover td{background:#f8fafd}
+details{background:var(--primary-light);border-radius:8px;padding:12px 16px;margin-bottom:10px;cursor:pointer;
+  transition:background .25s var(--ease),box-shadow .25s var(--ease)}
+details:hover{background:#dbeafb;box-shadow:0 3px 10px rgba(26,92,158,.1)}
+details summary{font-weight:600;color:var(--primary);font-size:14px;list-style:none;
+  display:flex;align-items:center;gap:6px}
+details summary::before{content:'▶';font-size:10px;transition:transform .3s var(--ease);display:inline-block}
+details[open] summary::before{transform:rotate(90deg)}
+details .detail-body{margin-top:9px;font-size:13.5px;animation:detailIn .3s var(--ease)}
+@keyframes detailIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+.stage-box{background:#fbfcfe;border:1px solid var(--border);border-left:4px solid var(--primary);
+  border-radius:8px;padding:16px 18px;margin-bottom:16px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.stage-box:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(26,92,158,.1);border-left-color:#0d3a66}
+.stage-box .stage-title{font-size:15px;font-weight:700;color:var(--primary);margin-bottom:8px}
+.stage-box .stage-goal{font-size:13px;background:var(--primary-light);border-radius:6px;
+  padding:8px 12px;margin-bottom:12px;color:#1a5c9e}
+.stage-box .stage-goal strong{color:#0d3a66}
+.resource-box{background:#f0f9f2;border-left:4px solid #3fa060;border-radius:0 8px 8px 0;
+  padding:11px 15px;font-size:13px;color:#1e5a32;margin-top:11px;
+  transition:transform .25s var(--ease)}
+.resource-box:hover{transform:translateX(3px)}
+.resource-box strong{color:#0d3a1e}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:13px;
+  padding-bottom:13px;border-bottom:1px dashed var(--border)}
+.filter-btn{padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:#fff;
+  color:var(--text-light);font-size:13px;cursor:pointer;font-family:inherit;
+  transition:all .25s var(--ease)}
+.filter-btn:hover{border-color:var(--primary);color:var(--primary);transform:translateY(-1px)}
+.filter-btn:active{transform:translateY(0) scale(.97)}
+.filter-btn.active{background:var(--primary);color:#fff;border-color:var(--primary);
+  box-shadow:0 3px 10px rgba(26,92,158,.25)}
+.filter-btn .cnt{opacity:.75;font-size:11px;margin-left:3px}
+.search-box{flex:1;min-width:150px;padding:7px 14px;border-radius:20px;border:1px solid var(--border);
+  font-size:13px;font-family:inherit;outline:none;
+  transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.search-box:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(26,92,158,.1)}
+.doc-list{display:flex;flex-direction:column;gap:9px}
+.doc-item{background:#fbfcfe;border:1px solid var(--border);border-radius:10px;padding:13px 15px;
+  transition:border-color .28s var(--ease),box-shadow .28s var(--ease),transform .28s var(--ease);
+  animation:docIn .38s var(--ease) backwards}
+@keyframes docIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.doc-item:hover{border-color:#b8d0ea;box-shadow:0 4px 14px rgba(26,92,158,.1);transform:translateY(-2px)}
+.doc-title{font-size:14.5px;font-weight:600;margin-bottom:5px;line-height:1.5}
+.doc-title a{color:inherit;text-decoration:none;transition:color .2s ease}
+.doc-title a:hover{color:var(--primary);text-decoration:underline}
+.doc-meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12px;color:var(--text-light)}
+.doc-meta .src{color:var(--primary);font-weight:500}
+.empty-tip{text-align:center;padding:36px 20px;color:var(--text-light);font-size:14px;
+  animation:docIn .35s var(--ease)}
+.empty-tip .big{font-size:30px;margin-bottom:8px;opacity:.5}
+.stat-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(105px,1fr));gap:10px;margin-bottom:15px}
+.stat-cell{background:linear-gradient(135deg,#f0f6fd,#e4eefb);border-radius:10px;padding:11px;text-align:center;
+  transition:transform .28s var(--ease),box-shadow .28s var(--ease)}
+.stat-cell:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(26,92,158,.14)}
+.stat-cell .num{font-size:19px;font-weight:700;color:var(--primary);line-height:1.2}
+.stat-cell .lbl{font-size:11.5px;color:var(--text-light);margin-top:2px}
+.upload-zone{border:2px dashed var(--border);border-radius:10px;padding:22px 16px;text-align:center;
+  cursor:pointer;background:#fbfcfe;
+  transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease)}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--primary);background:var(--primary-light);transform:scale(1.01)}
+.upload-zone .uz-icon{font-size:26px;margin-bottom:6px;transition:transform .35s var(--ease)}
+.upload-zone:hover .uz-icon{transform:translateY(-3px) scale(1.1)}
+.upload-zone .uz-text{font-size:13.5px;color:var(--text-light)}
+.upload-zone .uz-text strong{color:var(--primary)}
+input[type=file]{display:none}
+.btn{display:inline-block;padding:8px 18px;border-radius:20px;border:none;background:var(--primary);
+  color:#fff;font-size:13px;cursor:pointer;font-family:inherit;margin-top:10px;
+  transition:background .25s var(--ease),transform .2s var(--ease),box-shadow .25s var(--ease)}
+.btn:hover{background:#154b82;transform:translateY(-2px);box-shadow:0 5px 14px rgba(26,92,158,.3)}
+.btn:active{transform:translateY(0) scale(.97)}
+.btn.ghost{background:#fff;color:var(--primary);border:1px solid var(--primary)}
+.btn.ghost:hover{background:var(--primary-light);box-shadow:0 4px 12px rgba(26,92,158,.15)}
+.btn.ghost.warn{color:#b03030;border-color:#e8b8b8}
+.btn.ghost.warn:hover{background:#fde8e8;box-shadow:0 4px 12px rgba(176,48,48,.15)}
+.quick{transition:transform .3s var(--ease),box-shadow .3s var(--ease),background .3s var(--ease)}
+.quick:hover{transform:translateY(-4px);box-shadow:0 8px 20px rgba(26,92,158,.16);background:#dbeafb}
+.quick:active{transform:translateY(-1px) scale(.98)}
+footer{text-align:center;padding:22px 16px 40px;font-size:12px;color:var(--text-light)}
+@media(max-width:600px){
+  header h1{font-size:17px}
+  nav a{padding:11px 13px;font-size:13px}
+  main{padding:14px 12px 40px}
+  .card{padding:16px 14px}
+  .info-grid{grid-template-columns:1fr}
+  .filter-btn{padding:5px 11px;font-size:12px}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>聊城大学 · 电子信息工程</h1>
+  <p>学业规划与升学信息助手 · 最终版</p>
+</header>
+
+<nav id="nav">
+  <span class="nav-indicator" id="navIndicator"></span>
+  <a class="active" data-page="home">首页</a>
+  <a data-page="major">专业基础</a>
+  <a data-page="plan">四年规划</a>
+  <a data-page="detail">详细规划</a>
+  <a data-page="postgrad">保研 / 考研</a>
+  <a data-page="competition">竞赛与学分</a>
+  <a data-page="transfer">转专业</a>
+  <a data-page="docs">文档库</a>
+</nav>
+
+<main>
+
+<!-- ==================== 首页 ==================== -->
+<div class="page active" id="page-home">
+  <div class="card">
+    <h2><span class="icon">🎯</span>大一必须盯住的四件事</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="label">① 专业基础</div><div class="value">高数 · 线代 · 电路 · C语言</div></div>
+      <div class="info-item"><div class="label">② 保研硬指标</div><div class="value">绩点前30% + 无挂科 + 四级425</div></div>
+      <div class="info-item"><div class="label">③ 竞赛</div><div class="value">电赛 / 挑战杯 / 数学建模</div></div>
+      <div class="info-item"><div class="label">④ 转专业窗口</div><div class="value">大一末 · 绩点前50%</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">⚡</span>最关键的 5 条提醒</h2>
+    <ul class="check">
+      <li>推免绩点<strong>只算首次考试成绩</strong>，挂科重修刷分无效</li>
+      <li>大一第一学期的高数成绩，直接计入三年绩点排名</li>
+      <li>四级 425 分是保研硬门槛，越早过越好</li>
+      <li>创新学分最多可冲抵 <strong>8 个公选课学分</strong>，评优推免优先</li>
+      <li>转专业只有一次机会，大一末绩点前 50% 才可申请</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📌</span>快速跳转</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
+      <div class="info-item quick" data-page="major" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">📡</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">专业基础</div></div>
+      <div class="info-item quick" data-page="plan" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">🗓️</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">四年规划</div></div>
+      <div class="info-item quick" data-page="detail" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">📝</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">详细规划</div></div>
+      <div class="info-item quick" data-page="postgrad" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">🎓</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">保研 / 考研</div></div>
+      <div class="info-item quick" data-page="competition" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">🏆</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">竞赛学分</div></div>
+      <div class="info-item quick" data-page="transfer" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">🔄</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">转专业</div></div>
+      <div class="info-item quick" data-page="docs" style="text-align:center;padding:16px 8px;cursor:pointer">
+        <div style="font-size:20px">📁</div><div style="font-weight:600;font-size:13.5px;color:var(--primary);margin-top:4px">文档库</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== 专业基础 ==================== -->
+<div class="page" id="page-major">
+  <div class="card">
+    <h2><span class="icon">📡</span>专业概况</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="label">所属学院</div><div class="value">物理科学与信息工程学院</div></div>
+      <div class="info-item"><div class="label">学制 / 学位</div><div class="value">四年 · 工学学士</div></div>
+      <div class="info-item"><div class="label">培养方向</div><div class="value">嵌入式 / 集成电路 / 信号处理</div></div>
+      <div class="info-item"><div class="label">培养模式</div><div class="value">“3+1” 卓越工程师</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📖</span>核心课程（按重要性）</h2>
+    <h3>数学基础</h3>
+    <div><span class="tag tag-blue">高等数学</span><span class="tag tag-blue">线性代数</span><span class="tag tag-blue">概率论与数理统计</span><span class="tag tag-blue">复变函数与积分变换</span></div>
+    <h3>专业主干</h3>
+    <div><span class="tag tag-green">电路</span><span class="tag tag-green">模拟电子技术</span><span class="tag tag-green">数字系统与逻辑设计</span><span class="tag tag-green">信号与系统</span><span class="tag tag-green">通信原理</span><span class="tag tag-green">数字信号处理</span><span class="tag tag-green">微处理器原理</span></div>
+    <h3>编程工具</h3>
+    <div><span class="tag tag-purple">C语言程序设计</span><span class="tag tag-purple">Python语言及人工智能</span><span class="tag tag-purple">MATLAB语言及应用</span></div>
+    <h3>实践环节</h3>
+    <ul class="check">
+      <li>电路 / 模电 / 数电 / 信号处理 / 通信原理实验</li>
+      <li>电子工艺实训、课程设计、生产实习、毕业设计</li>
+    </ul>
+    <div class="note"><strong>大一重点：</strong>高数、线代、电路、C语言。这四门学分高、先修关系重，绩点权重最大。</div>
+  </div>
+</div>
+
+<!-- ==================== 四年规划 ==================== -->
+<div class="page" id="page-plan">
+  <div class="card">
+    <h2><span class="icon">🗓️</span>大一到大四路线图</h2>
+    <div class="timeline">
+      <div class="tl-item"><div class="year">大一 · 打地基</div><div class="desc">
+        <ul class="check"><li>死磕高数、线代、电路，绩点决定保研上限</li>
+        <li>学好 C 语言，后续所有编程课的基础</li>
+        <li>加入电子创新实验室或科技社团</li>
+        <li>了解培养方案，确认课程学分与先修关系</li></ul></div></div>
+      <div class="tl-item"><div class="year">大二 · 进专业</div><div class="desc">
+        <ul class="check"><li>模电、数电、信号与系统三座大山学扎实</li>
+        <li>学 Python + MATLAB，做数据处理和仿真</li>
+        <li>参加全国大学生电子设计竞赛（偶数年国赛）</li>
+        <li>接触单片机 / STM32，做小型嵌入式项目</li></ul></div></div>
+      <div class="tl-item"><div class="year">大三 · 定方向冲保研</div><div class="desc">
+        <ul class="check"><li>保研核心期，绩点只算首次考试成绩</li>
+        <li>选专业方向课：嵌入式 / 信号处理 / 集成电路</li>
+        <li>参加挑战杯、互联网+ 积累加分材料</li>
+        <li>关注目标院校夏令营（4-6月），投递申请</li>
+        <li>若不保研，启动考研复习</li></ul></div></div>
+      <div class="tl-item"><div class="year">大四 · 冲刺落地</div><div class="desc">
+        <ul class="check"><li>9 月推免系统填报志愿，参加复试</li>
+        <li>10-12 月考研冲刺，同时秋招保底</li>
+        <li>完成毕业设计，优先选企业实习结合项目</li></ul></div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📊</span>每学期关键动作</h2>
+    <div class="table-wrap"><table>
+      <thead><tr><th>学期</th><th>学业重点</th><th>竞赛 / 实践</th></tr></thead>
+      <tbody>
+        <tr><td>大一上</td><td>高数、C语言、电路</td><td>加入实验室 / 社团</td></tr>
+        <tr><td>大一下</td><td>高数、线代、大学物理</td><td>校内电子赛观摩</td></tr>
+        <tr><td>大二上</td><td>模电、数电、信号与系统</td><td>数学建模、电赛培训</td></tr>
+        <tr><td>大二下</td><td>概率论、复变函数、Python</td><td>参加电赛 / 建模赛</td></tr>
+        <tr><td>大三上</td><td>数字信号处理、通信原理</td><td>挑战杯 / 互联网+</td></tr>
+        <tr><td>大三下</td><td>专业方向课、DSP / 嵌入式</td><td>冲刺高级别竞赛</td></tr>
+        <tr><td>大四上</td><td>毕业设计开题</td><td>推免复试 / 考研初试</td></tr>
+        <tr><td>大四下</td><td>毕业设计</td><td>复试 / 调剂 / 录取</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ==================== 详细规划 ==================== -->
+<div class="page" id="page-detail">
+  <div class="card">
+    <h2><span class="icon">📝</span>分阶段详细规划（含校内资源用法）</h2>
+    <p style="font-size:13.5px;color:var(--text-light);margin-bottom:16px">
+      按“大一→大二→大三→大四”拆成四段，每段写清楚：做什么、怎么做、用什么校内资源。
+    </p>
+
+    <div class="stage-box">
+      <div class="stage-title">阶段一 · 大一 → 大二：打地基 + 摸方向</div>
+      <div class="stage-goal"><strong>核心目标：</strong>绩点站稳专业前 30%，四级过 425，确定一个技术兴趣点。</div>
+      <h3>做什么</h3>
+      <ul class="check">
+        <li><strong>高数、线代、电路、C语言</strong>是四门命脉课。高数和线代学分最高，直接决定绩点排名；电路是模电、数电、信号与系统的先修课；C语言是后续所有编程课的地基。</li>
+        <li><strong>四级尽早考</strong>。大一上就能报名，425 是保研硬门槛，越早过越好，别拖到大三。</li>
+        <li><strong>加入一个实验室或社团</strong>。物信学院有电工电子、通信工程等实验教学中心，面向本科生开放、预约制。大一进去先从基础技能练起，跟学长做简单单片机小项目。</li>
+        <li><strong>吃透培养方案</strong>。登录教务系统（数字聊大或企业微信进入），把四年课程、学分、先修关系全部看一遍。</li>
+        <li><strong>大一暑假参加一次校内赛</strong>。“青软杯”电子科技创新大赛由物信学院承办，门槛低，适合大一练手。</li>
+      </ul>
+      <div class="resource-box">
+        <strong>校内资源怎么用：</strong><br>
+        · <strong>图书馆电子资源</strong>：用数字聊大账号登录 CARSI 平台，可校外访问知网等数据库。<br>
+        · <strong>教务系统</strong>：每学期选课上限 30 学分、下限 18 学分，分初选、退补选、确认三阶段。大一先选好必修课，通识选修不急。
+      </div>
+    </div>
+
+    <div class="stage-box">
+      <div class="stage-title">阶段二 · 大二 → 大三：攻专业 + 进实验室</div>
+      <div class="stage-goal"><strong>核心目标：</strong>模电 / 数电 / 信号与系统学扎实，进实验室做真实项目，参加一次省级以上竞赛。</div>
+      <h3>做什么</h3>
+      <ul class="check">
+        <li><strong>模电、数电、信号与系统</strong>是大二三座大山，是专业分水岭。信号与系统尤其重要，考研专业课大概率考它。</li>
+        <li><strong>Python + MATLAB</strong>要会用。Python 做数据处理和仿真，MATLAB 做信号与通信仿真，认真跟课。</li>
+        <li><strong>正式进实验室</strong>。大二找一位导师，申请加入课题组。学校推行本科生导师制，鼓励教师吸纳本科生参与课题。物信学院有山东省光通信工程技术研究中心等平台。</li>
+        <li><strong>参加全国大学生电子设计竞赛</strong>。偶数年国赛，大二暑假是备赛黄金期，省级以上奖项对保研加分很有价值。</li>
+        <li><strong>同步参加数学建模竞赛</strong>。每年 9 月国赛，锻炼建模、编程、论文写作综合能力。</li>
+      </ul>
+      <div class="resource-box">
+        <strong>校内资源怎么用：</strong><br>
+        · <strong>实验室预约</strong>：学校实行实验室开放制度，进入前向实验室提出预约申请。找导师确认课题组所在实验室，按流程预约使用。<br>
+        · <strong>大创项目</strong>：学校有大学生创新创业训练计划，校内每年立项约 200 项，可组队申请、有导师指导。
+      </div>
+    </div>
+
+    <div class="stage-box">
+      <div class="stage-title">阶段三 · 大三 → 大四：定方向 + 冲保研 / 考研</div>
+      <div class="stage-goal"><strong>核心目标：</strong>保研的全力冲保研，不保研的启动考研复习，同时完成专业方向课。</div>
+
+      <h3>保研路线</h3>
+      <ul class="check">
+        <li>大三上是保研<strong>最后窗口期</strong>，绩点前三年已定型，确保无任何挂科。推免绩点只算首次考试成绩，重修无效。</li>
+        <li><strong>参加高含金量竞赛</strong>：挑战杯、互联网+、ICAN 创新创业大赛等。</li>
+        <li><strong>大三下（4-6月）</strong>关注目标院校夏令营通知，提前和老师取得联系。</li>
+        <li><strong>准备夏令营材料</strong>：成绩单、获奖证书、四六级成绩单、个人陈述、推荐信。面试准备专业课知识、科研项目陈述、英语口语和文献翻译。</li>
+      </ul>
+
+      <h3>考研路线</h3>
+      <ul class="check">
+        <li>大三上确定目标院校和专业方向。聊城大学本校电子信息专硕初试科目为数学二 + 数字电子技术基础，复试考模拟电子技术，同等学力加试信号与系统和数字信号处理。</li>
+        <li>想冲外校，大三上结束前确定专业课科目，别拖到大四才开始。</li>
+        <li>大三暑假是考研黄金期，数学和专业课必须进入强化阶段。</li>
+      </ul>
+
+      <div class="resource-box">
+        <strong>校内资源怎么用：</strong><br>
+        · <strong>保研信息</strong>：关注聊城大学研究生招生网（yz.lcu.edu.cn）和物信学院官网（phys.lcu.edu.cn）。<br>
+        · <strong>考研资料</strong>：图书馆 CARSI 可访问知网，查目标院校导师论文和历年真题。<br>
+        · <strong>导师资源</strong>：大三主动找导师聊升学规划，导师通常有目标院校人脉，可帮你推荐。
+      </div>
+    </div>
+
+    <div class="stage-box">
+      <div class="stage-title">阶段四 · 大四 → 升学：落地执行</div>
+      <div class="stage-goal"><strong>核心目标：</strong>推免系统填报 / 考研初试复试 / 毕业设计，三条线并行。</div>
+
+      <h3>保研时间线（9 月）</h3>
+      <ul class="check">
+        <li><strong>9月21日 9:00</strong> 推免服务系统开放，填报志愿。</li>
+        <li><strong>9月22日 8:00 后</strong> 接收并确认学校考核通知。</li>
+        <li><strong>9月22日起</strong> 参加综合考核：材料审核 + 面试（不少于 20 分钟）+ 思政考核。</li>
+        <li>考核通过后接收待录取通知，确认录取。</li>
+      </ul>
+
+      <h3>考研时间线</h3>
+      <ul class="check">
+        <li>9-10 月：考研报名</li>
+        <li>12 月下旬：初试</li>
+        <li>次年 2-3 月：初试成绩公布，准备复试</li>
+        <li>3-4 月：复试 / 调剂</li>
+      </ul>
+
+      <h3>毕业设计</h3>
+      <ul class="check">
+        <li>优先选与实习或科研项目结合的方向。物信学院导师通常把学生毕设纳入自己科研项目，形成“导师—本科生毕业设计”模式。</li>
+      </ul>
+    </div>
+
+    <h3>升学路径对比</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>维度</th><th>保研</th><th>考研</th></tr></thead>
+      <tbody>
+        <tr><td>核心门槛</td><td>绩点前 30% + 无挂科 + 四级 425</td><td>初试分数 + 复试表现</td></tr>
+        <tr><td>准备周期</td><td>大一到大三持续积累</td><td>大三下到大四上集中冲刺</td></tr>
+        <tr><td>竞赛作用</td><td>加分（发展素质评价 20% 内）</td><td>复试参考，不直接加分</td></tr>
+        <tr><td>风险</td><td>排名不够就出局</td><td>一次考试波动大</td></tr>
+        <tr><td>策略</td><td>大一就保绩点，大三同时准备考研保底</td><td>大三下全力复习，秋招保底</td></tr>
+      </tbody>
+    </table></div>
+
+  </div>
+</div>
+
+<!-- ==================== 保研 / 考研 ==================== -->
+<div class="page" id="page-postgrad">
+  <div class="card">
+    <h2><span class="icon">🎓</span>保研（推免）硬指标</h2>
+    <h3>申请门槛（缺一不可）</h3>
+    <ul class="check">
+      <li>前六学期<strong>无不及格课程</strong>，首次考试成绩不及格直接出局</li>
+      <li>平均学分绩点在专业排名<strong>前 30% 以内</strong></li>
+      <li>大学英语四级 <strong>425 分及以上</strong></li>
+      <li>无考试违纪、剽窃学术成果记录</li>
+    </ul>
+    <h3>综合成绩构成</h3>
+    <div class="info-grid">
+      <div class="info-item"><div class="label">平均学分绩点</div><div class="value">占 80%</div></div>
+      <div class="info-item"><div class="label">学生发展素质评价</div><div class="value">占 20%</div></div>
+    </div>
+    <div class="note"><strong>关键：</strong>推免绩点只算首次考试成绩，挂科重修刷分无效。竞赛和素质只在 20% 里做文章。</div>
+    <h3>接收流程时间线</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>时间</th><th>事项</th></tr></thead>
+      <tbody>
+        <tr><td>9月21日 9:00 起</td><td>登录教育部“推免服务系统”填报志愿</td></tr>
+        <tr><td>9月22日 8:00 后</td><td>学校发送考核通知，及时确认</td></tr>
+        <tr><td>9月22日起</td><td>综合考核（材料审核 + 面试 + 思政），面试不少于 20 分钟</td></tr>
+        <tr><td>考核后</td><td>发送待录取通知，考生确认</td></tr>
+        <tr><td>公示后</td><td>名单报学校审议并公示</td></tr>
+      </tbody>
+    </table></div>
+    <h3>需提交材料</h3>
+    <ul class="check">
+      <li>身份证、学生证、学籍在线验证报告</li>
+      <li>在校学习成绩单原件（加盖教务公章）</li>
+      <li>思想政治品德审核表、诚信承诺书</li>
+      <li>四六级成绩单、获奖证书、论文或原创成果</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📈</span>考研要点</h2>
+    <div class="info-grid">
+      <div class="info-item"><div class="label">学校年招生规模</div><div class="value">约 1310 人（含推免）</div></div>
+      <div class="info-item"><div class="label">一志愿复试比例</div><div class="value">不低于 150%</div></div>
+      <div class="info-item"><div class="label">调剂复试比例</div><div class="value">不低于 200%</div></div>
+      <div class="info-item"><div class="label">初试加分</div><div class="value">符合条件加 10 分</div></div>
+    </div>
+    <h3>电子信息工程考研专业课常见组合</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>组合类型</th><th>常见科目</th></tr></thead>
+      <tbody>
+        <tr><td>信号类</td><td>信号与系统 + 数字信号处理</td></tr>
+        <tr><td>通信类</td><td>通信原理 + 信号与系统</td></tr>
+        <tr><td>电路类</td><td>电路 + 模拟电子技术</td></tr>
+        <tr><td>计算机类</td><td>数据结构 + 计算机网络</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><strong>建议：</strong>大三上结束前确定目标院校，根据招生目录确定专业课科目，不要盲目复习。</div>
+  </div>
+</div>
+
+<!-- ==================== 竞赛与学分 ==================== -->
+<div class="page" id="page-competition">
+  <div class="card">
+    <h2><span class="icon">🏆</span>学科竞赛目录（2024 版）</h2>
+    <p style="font-size:13.5px;color:var(--text-light);margin-bottom:10px">
+      学校 2024 版学科竞赛目录共收录 <strong>192 项</strong>赛事，分 A+、A、B、C、D 五类。A+ 类为教育部、共青团中央等多部委主办、纳入中国高等教育学会榜单的赛事。
+    </p>
+    <h3>电子信息工程高相关竞赛</h3>
+    <div class="table-wrap"><table>
+      <thead><tr><th>竞赛名称</th><th>级别</th><th>建议时间</th></tr></thead>
+      <tbody>
+        <tr><td>全国大学生电子设计竞赛</td><td><span class="tag tag-red">A 类</span></td><td>大二（偶数年国赛）</td></tr>
+        <tr><td>中国国际大学生创新大赛（互联网+）</td><td><span class="tag tag-red">A+ 类</span></td><td>大二至大三</td></tr>
+        <tr><td>“挑战杯”课外学术科技作品竞赛</td><td><span class="tag tag-red">A+ 类</span></td><td>大二至大三</td></tr>
+        <tr><td>全国大学生数学建模竞赛</td><td><span class="tag tag-red">A 类</span></td><td>大二</td></tr>
+        <tr><td>“大唐杯”新一代信息通信技术大赛</td><td><span class="tag tag-orange">B 类</span></td><td>大二至大三</td></tr>
+        <tr><td>“青软杯”电子科技创新大赛（校级）</td><td><span class="tag tag-blue">校级</span></td><td>大一至大二</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note"><strong>学院竞赛成绩参考：</strong>近三年学生在挑战杯、数学建模等竞赛中获奖 6000 余人次；2021 年全国大学生电子设计竞赛获国家级二等奖；第十八届挑战杯实现特等奖突破。</div>
+  </div>
+  <div class="card">
+    <h2><span class="icon">💡</span>创新学分</h2>
+    <ul class="check">
+      <li>参加竞赛、科研项目、发表论文可申请创新学分</li>
+      <li>创新学分<strong>最多可冲抵 8 个公选课学分</strong></li>
+      <li>创新学分优异者，在<strong>评优、奖学金、推免时同等条件优先考虑</strong></li>
+      <li>创新学分本身不直接加绩点，但在推免“发展素质评价”20% 中是重要材料</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2><span class="icon">📋</span>学校官方文件要点</h2>
+    <details>
+      <summary>大学生学科竞赛活动管理办法</summary>
+      <div class="detail-body">学科竞赛分五类：A+ 类为教育部、共青团中央等多部委主办、具有重大影响力的综合类国际、全国性竞赛；A 类为教育部等部委主办的全国性竞赛；B 类为省政府及有关部门或省一级学术行业学（协）会组织的全省性竞赛。</div>
+    </details>
+    <details>
+      <summary>推免工作实施办法</summary>
+      <div class="detail-body">综合评价成绩 = 平均学分绩点（占比不低于 80%）+ 学生发展素质评价（占比不高于 20%）。各学院在此基础上制定实施细则。</div>
+    </details>
+    <details>
+      <summary>硕士研究生招生加分政策</summary>
+      <div class="detail-body">符合教育部规定条件的考生，3 年内报名参加全国硕士研究生招生考试，可申请初试总成绩加 10 分，同等条件下优先录取。退役大学生士兵另有专项计划。</div>
+    </details>
+    <details>
+      <summary>“优师计划”推免专项</summary>
+      <div class="detail-body">学校每年安排不少于 50 个推免指标用于招收“优师计划”教育硕士研究生。2026 年“优师计划”推荐名额为 40 人，面向师范类应届毕业生。</div>
+    </details>
+  </div>
+</div>
+
+<!-- ==================== 转专业 ==================== -->
+<div class="page" id="page-transfer">
+  <div class="card">
+    <h2><span class="icon">🔄</span>转专业核心规则</h2>
+    <div class="note"><strong>窗口期：</strong>第一学年末，在校期间<strong>只能转一次</strong>。</div>
+    <h3>基本条件</h3>
+    <ul class="check">
+      <li>第一学期平均学分绩点排名<strong>前 50%</strong></li>
+      <li>原专业课程首次考核<strong>无不及格</strong></li>
+      <li>无违纪行为</li>
+    </ul>
+    <h3>接收限制</h3>
+    <ul class="check">
+      <li>转专业接收人数一般不超过该专业当前年级在校生的 <strong>15%</strong></li>
+      <li>热门专业竞争更激烈，绩点越高越有优势</li>
+      <li>校企合作办学类学生只能在<strong>同一企业合作的校企合作专业范围内</strong>申请转专业，不能跨到普通类</li>
+    </ul>
+    <div class="note"><strong>提醒：</strong>转专业只有一次机会，决定前先确认目标专业的培养方案、课程难度和就业方向，不要只看名字。</div>
+  </div>
+</div>
+
+<!-- ==================== 文档库 ==================== -->
+<div class="page" id="page-docs">
+  <div class="card">
+    <h2><span class="icon">📁</span>文档库</h2>
+    <div class="stat-row" id="statRow"></div>
+    <div class="toolbar">
+      <button class="filter-btn active" data-filter="all">全部<span class="cnt" id="cnt-all"></span></button>
+      <button class="filter-btn" data-filter="保研">保研<span class="cnt" id="cnt-保研"></span></button>
+      <button class="filter-btn" data-filter="考研">考研<span class="cnt" id="cnt-考研"></span></button>
+      <button class="filter-btn" data-filter="竞赛">竞赛<span class="cnt" id="cnt-竞赛"></span></button>
+      <button class="filter-btn" data-filter="考试">考试<span class="cnt" id="cnt-考试"></span></button>
+      <button class="filter-btn" data-filter="政策">政策<span class="cnt" id="cnt-政策"></span></button>
+      <input type="text" class="search-box" id="searchBox" placeholder="搜索标题、来源...">
+    </div>
+    <div class="doc-list" id="docList"></div>
+  </div>
+
+  <div class="card">
+    <h2><span class="icon">📥</span>导入爬虫数据</h2>
+    <p style="font-size:13.5px;color:var(--text-light);margin-bottom:12px">
+      运行 Python 爬虫后生成的 <code>documents.json</code> 可直接导入，替换内置示例数据。导入后保存在浏览器本地，刷新不丢。
+    </p>
+    <div class="upload-zone" id="uploadZone">
+      <div class="uz-icon">📄</div>
+      <div class="uz-text">点击选择文件，或把 <strong>documents.json</strong> 拖到这里</div>
+    </div>
+    <input type="file" id="fileInput" accept=".json,application/json">
+    <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn ghost" id="resetBtn">恢复默认数据</button>
+      <button class="btn ghost warn" id="clearBtn">清空所有数据</button>
+    </div>
+    <div class="note" style="margin-top:14px">
+      <strong>JSON 格式要求：</strong>数组，每条包含 <code>source</code>（来源）、<code>title</code>（标题）、<code>url</code>（链接）、<code>tags</code>（标签数组，如 ["保研","政策"]）、<code>date</code>（日期）。
+    </div>
+  </div>
+</div>
+
+</main>
+
+<footer>
+  聊城大学 · 电子信息工程学业助手 · 最终版<br>
+  信息来源于学校官方公开渠道，仅供个人学习参考 · 建议定期核对最新文件
+</footer>
+
+<script>
+// ==================== 页面切换（带平滑动画） ====================
+const navLinks = document.querySelectorAll('#nav a');
+const pages = document.querySelectorAll('.page');
+const navEl = document.getElementById('nav');
+const navIndicator = document.getElementById('navIndicator');
+let switching = false;
+
+function updateIndicator(){
+  const active = navEl.querySelector('a.active');
+  if(!active){ navIndicator.style.width = '0'; return; }
+  const navRect = navEl.getBoundingClientRect();
+  const linkRect = active.getBoundingClientRect();
+  const left = linkRect.left - navRect.left + navEl.scrollLeft;
+  navIndicator.style.left = left + 'px';
+  navIndicator.style.width = linkRect.width + 'px';
+}
+
+function switchPage(pageId){
+  const target = document.getElementById('page-' + pageId);
+  if(!target) return;
+  const current = document.querySelector('.page.active');
+  if(current === target || switching) return;
+
+  switching = true;
+
+  navLinks.forEach(l => l.classList.remove('active'));
+  const link = navEl.querySelector(`a[data-page="${pageId}"]`);
+  if(link){
+    link.classList.add('active');
+    if(link.scrollIntoView) link.scrollIntoView({behavior:'smooth', block:'nearest', inline:'center'});
+  }
+  updateIndicator();
+
+  const revealTarget = () => {
+    if(current) current.classList.remove('active');
+    target.classList.add('active');
+    void target.offsetWidth;
+    target.classList.add('entering');
+
+    window.scrollTo({top:0, behavior:'smooth'});
+    if(pageId === 'docs') renderDocs();
+
+    setTimeout(() => {
+      target.classList.remove('entering');
+      switching = false;
+    }, 650);
+  };
+
+  if(current){
+    current.classList.add('leaving');
+    setTimeout(() => {
+      current.classList.remove('leaving');
+      revealTarget();
+    }, 160);
+  } else {
+    revealTarget();
+  }
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => switchPage(link.dataset.page));
+});
+
+document.querySelectorAll('.quick').forEach(el => {
+  el.addEventListener('click', () => switchPage(el.dataset.page));
+});
+
+document.addEventListener('keydown', e => {
+  if(e.target.tagName === 'INPUT') return;
+  const order = ['home','major','plan','detail','postgrad','competition','transfer','docs'];
+  const current = document.querySelector('#nav a.active')?.dataset.page;
+  const idx = order.indexOf(current);
+  if(e.key === 'ArrowRight' && idx < order.length - 1) switchPage(order[idx + 1]);
+  if(e.key === 'ArrowLeft' && idx > 0) switchPage(order[idx - 1]);
+});
+
+window.addEventListener('resize', updateIndicator);
+window.addEventListener('load', updateIndicator);
+
+// ==================== 文档库（连接云端 GitHub 数据） ====================
+// ⚠️ 这里已经自动填好你的用户名了！
+const DATA_URL = 'https://cdn.jsdelivr.net/gh/Baihaoyu123/lcu-assistant@main/data/documents.json';
+const STORAGE_KEY = 'lcu_docs_v1';
+
+const DEFAULT_DOCS = [
+  {source:"物理科学与信息工程学院", title:"物信学院2026届推免工作实施细则", url:"https://phys.lcu.edu.cn", tags:["保研","政策"], date:"2025-09-01"},
+  {source:"物理科学与信息工程学院", title:"物信学院2025届毕业生保研去向：北邮、西电、山师等", url:"https://phys.lcu.edu.cn", tags:["保研","考研"], date:"2025-07-10"},
+  {source:"聊城大学研究生招生网", title:"聊城大学2027年接收推荐免试研究生章程", url:"https://yz.lcu.edu.cn", tags:["保研","政策"], date:"2026-09-15"},
+  {source:"聊城大学研究生招生网", title:"聊城大学2025年硕士研究生招生简章及专业目录", url:"https://yz.lcu.edu.cn", tags:["考研","政策"], date:"2024-09-20"}
+];
+
+let allDocs = DEFAULT_DOCS.slice();
+let currentFilter = 'all';
+let currentSearch = '';
+
+async function loadDocs() {
+  let localCache = null;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) localCache = JSON.parse(raw);
+  } catch(e) {}
+
+  try {
+    const resp = await fetch(DATA_URL + '?t=' + Date.now());
+    if (resp.ok) {
+      const remote = await resp.json();
+      if (Array.isArray(remote) && remote.length > 0) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(remote));
+        return remote;
+      }
+    }
+  } catch(e) {
+    console.log('远程数据拉取失败，使用本地缓存', e);
+  }
+
+  if (localCache) return localCache;
+  return DEFAULT_DOCS.slice();
+}
+
+function saveDocs(docs){
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(docs)); }catch(e){}
+}
+
+function renderStats(){
+  const total = allDocs.length;
+  const cats = ['保研','考研','竞赛','考试','政策'];
+  let html = `<div class="stat-cell"><div class="num">${total}</div><div class="lbl">全部文档</div></div>`;
+  cats.forEach(c => {
+    const n = allDocs.filter(d => (d.tags||[]).includes(c)).length;
+    html += `<div class="stat-cell"><div class="num">${n}</div><div class="lbl">${c}</div></div>`;
+  });
+  document.getElementById('statRow').innerHTML = html;
+
+  const cntAll = document.getElementById('cnt-all');
+  if(cntAll) cntAll.textContent = total;
+  cats.forEach(c => {
+    const el = document.getElementById('cnt-' + c);
+    if(el) el.textContent = allDocs.filter(d => (d.tags||[]).includes(c)).length;
+  });
+}
+
+function renderDocs(){
+  renderStats();
+  const list = document.getElementById('docList');
+  if(!list) return;
+  let filtered = allDocs.slice();
+
+  if(currentFilter !== 'all'){
+    filtered = filtered.filter(d => (d.tags||[]).includes(currentFilter));
+  }
+  if(currentSearch){
+    const kw = currentSearch.toLowerCase();
+    filtered = filtered.filter(d =>
+      (d.title||'').toLowerCase().includes(kw) ||
+      (d.source||'').toLowerCase().includes(kw)
+    );
+  }
+
+  if(filtered.length === 0){
+    list.innerHTML = `<div class="empty-tip"><div class="big">📭</div>没有匹配的文档<br><span style="font-size:12px">试试换个分类或关键词</span></div>`;
+    return;
+  }
+
+  list.innerHTML = filtered.map((d, i) => {
+    const tags = (d.tags||[]).map(t => {
+      const cls = {'保研':'tag-red','考研':'tag-orange','竞赛':'tag-green','考试':'tag-blue','政策':'tag-purple'}[t] || 'tag-blue';
+      return `<span class="tag ${cls}">${t}</span>`;
+    }).join('');
+    const link = d.url ? `<a href="${d.url}" target="_blank" rel="noopener">${d.title}</a>` : d.title;
+    const delay = Math.min(i * 0.03, 0.35).toFixed(2);
+    return `<div class="doc-item" style="animation-delay:${delay}s">
+      <div class="doc-title">${link}</div>
+      <div class="doc-meta">
+        <span class="src">${d.source||'未知来源'}</span>
+        <span class="date">${d.date||''}</span>
+        ${tags}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = btn.dataset.filter;
+    renderDocs();
+  });
+});
+
+const searchBox = document.getElementById('searchBox');
+if(searchBox){
+  searchBox.addEventListener('input', e => {
+    currentSearch = e.target.value.trim();
+    renderDocs();
+  });
+}
+
+const uploadZone = document.getElementById('uploadZone');
+const fileInput = document.getElementById('fileInput');
+
+if(uploadZone){
+  uploadZone.addEventListener('click', () => fileInput.click());
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag');
+    if(e.dataTransfer.files.length) handleFile(e.dataTransfer.files[0]);
+  });
+}
+if(fileInput){
+  fileInput.addEventListener('change', e => {
+    if(e.target.files.length) handleFile(e.target.files[0]);
+    e.target.value = '';
+  });
+}
+
+function handleFile(file){
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try{
+      const data = JSON.parse(ev.target.result);
+      if(!Array.isArray(data)) throw new Error('数据格式不是数组');
+      const valid = data.filter(d => d && d.title);
+      if(valid.length === 0) throw new Error('没有有效文档');
+      allDocs = valid;
+      saveDocs(allDocs);
+      renderDocs();
+      alert(`导入成功，共 ${valid.length} 条文档`);
+    }catch(err){
+      alert('导入失败：' + err.message + '\n请确认是爬虫生成的 documents.json');
+    }
+  };
+  reader.readAsText(file, 'utf-8');
+}
+
+const resetBtn = document.getElementById('resetBtn');
+if(resetBtn){
+  resetBtn.addEventListener('click', () => {
+    if(confirm('确定恢复为内置示例数据吗？当前导入的数据会被覆盖。')){
+      allDocs = DEFAULT_DOCS.slice();
+      saveDocs(allDocs);
+      renderDocs();
+    }
+  });
+}
+
+const clearBtn = document.getElementById('clearBtn');
+if(clearBtn){
+  clearBtn.addEventListener('click', () => {
+    if(confirm('确定清空所有文档吗？此操作不可恢复。')){
+      allDocs = [];
+      saveDocs(allDocs);
+      renderDocs();
+    }
+  });
+}
+
+// ==================== 初始化 ====================
+(async function init(){
+  allDocs = await loadDocs();
+  renderDocs();
+  requestAnimationFrame(() => {
+    const home = document.getElementById('page-home');
+    if(home){
+      home.classList.add('entering');
+      setTimeout(() => home.classList.remove('entering'), 650);
+    }
+    updateIndicator();
+  });
+})();
+</script>
+<!-- ==================== 专属学习小助手 ==================== -->
+<style>
+  #aiChatBtn {
+    position: fixed; bottom: 24px; right: 24px; width: 54px; height: 54px;
+    background: var(--primary); color: #fff; border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(26,92,158,.4); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; z-index: 9999; transition: transform .3s var(--ease);
+  }
+  #aiChatBtn:hover { transform: scale(1.1) rotate(10deg); }
+  #aiChatBox {
+    position: fixed; bottom: 90px; right: 24px; width: 330px; height: 450px;
+    background: #fff; border-radius: 14px; box-shadow: 0 8px 30px rgba(0,0,0,.15);
+    border: 1px solid var(--border); z-index: 9998; display: none;
+    flex-direction: column; overflow: hidden; animation: pageIn .3s var(--ease);
+  }
+  #aiChatBox.active { display: flex; }
+  .ai-head { background: var(--primary); color: #fff; padding: 12px 16px; font-size: 14px; font-weight: 600; display: flex; justify-content: space-between; }
+  .ai-head span { cursor: pointer; opacity: .8; }
+  .ai-body { flex: 1; padding: 14px; overflow-y: auto; background: #f8fafc; display: flex; flex-direction: column; gap: 10px; font-size: 13.5px; line-height: 1.6; }
+  .msg { max-width: 85%; padding: 8px 12px; border-radius: 12px; word-wrap: break-word; }
+  .msg.bot { background: #fff; border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 2px; }
+  .msg.user { background: var(--primary); color: #fff; align-self: flex-end; border-bottom-right-radius: 2px; }
+  .ai-foot { display: flex; border-top: 1px solid var(--border); padding: 8px; background: #fff; }
+  .ai-foot input { flex: 1; border: none; outline: none; padding: 8px; font-size: 13.5px; font-family: inherit; }
+  .ai-foot button { background: var(--primary); color: #fff; border: none; border-radius: 8px; padding: 8px 16px; font-size: 13px; cursor: pointer; font-family: inherit; }
+  .ai-foot button:hover { background: #154b82; }
+</style>
+
+<div id="aiChatBtn" onclick="toggleAiChat()">🎓</div>
+<div id="aiChatBox">
+  <div class="ai-head">
+    <span>聊大电院 · 学习小助手</span>
+    <span onclick="toggleAiChat()">✖</span>
+  </div>
+  <div class="ai-body" id="aiChatBody">
+    <div class="msg bot">你好！我是专属的学习小助手。你可以问我：<br>“保研需要什么条件？”<br>“大一该学什么？”<br>“转专业怎么弄？”</div>
+  </div>
+  <div class="ai-foot">
+    <input type="text" id="aiInput" placeholder="输入学习问题..." onkeydown="if(event.key==='Enter') sendAiMsg()">
+    <button onclick="sendAiMsg()">发送</button>
+  </div>
+</div>
+
+<script>
+// 1. 本地知识库（限定范围，防止乱答）
+const AI_KB = [
+  { kw: ["保研", "推免", "免试"], ans: "保研（推免）硬指标：① 前六学期无不及格，首次考试不过直接出局；② 绩点专业排名前 30%；③ 四级 425 分及以上。综合成绩绩点占 80%，素质评价占 20%。详情看“保研/考研”页面。" },
+  { kw: ["考研", "初试", "复试"], ans: "考研建议大三上确定院校，复习数学一/二、英语一/二和专业课（信号与系统/通信原理等）。聊大本校电子信息专硕初试考数学二+数字电子技术基础。详见“保研/考研”页面。" },
+  { kw: ["大一", "第一年", "刚入学"], ans: "大一核心：死磕高数、线代、电路、C语言。四级尽早考（425是硬门槛）。加入电子实验室或社团。详情看“详细规划”页面。" },
+  { kw: ["大二", "第二年"], ans: "大二核心：攻克模电、数电、信号与系统。学Python+MATLAB。参加全国大学生电子设计竞赛（偶数年国赛）。找导师进实验室做项目。详情看“详细规划”页面。" },
+  { kw: ["大三", "第三年"], ans: "大三核心：保研最后窗口期，确保不挂科。选专业方向课（嵌入式/信号处理/集成电路）。参加挑战杯、互联网+。大三下关注夏令营。不保研就启动考研复习。" },
+  { kw: ["大四", "第四年", "毕业"], ans: "大四核心：9月推免系统填报、考研冲刺、做毕业设计。毕设优先选与企业实习结合的方向。详见“详细规划”页面。" },
+  { kw: ["转专业", "换专业"], ans: "转专业窗口在第一学年末，只有一次机会。要求：第一学期绩点排名前50%，无不及格，无违纪。接收人数不超过该专业在校生的15%。详见“转专业”页面。" },
+  { kw: ["竞赛", "电赛", "挑战杯", "建模"], ans: "推荐关注：全国大学生电子设计竞赛（A类，偶数年国赛）、挑战杯/互联网+（A+类）、数学建模（A类）。“青软杯”是校赛，大一练手很合适。详见“竞赛与学分”页面。" },
+  { kw: ["四级", "英语"], ans: "四级425分是保研硬门槛。越早过越好，大一上就可以报名。建议大一第一学期就考过，不要拖到大三。" },
+  { kw: ["高数", "数学", "线代"], ans: "高数和线性代数学分最高，直接决定绩点排名。电路是模电、数电、信号与系统的先修课。大一务必死磕这四门。" },
+  { kw: ["信号与系统", "模电", "数电"], ans: "这三门是大二的三座大山，是专业分水岭。信号与系统尤其重要，考研专业课大概率考它。学好了大三方向课才跟得上。" },
+  { kw: ["实验室", "导师", "科研"], ans: "大二找一位导师，申请加入课题组。学校推行本科生导师制，鼓励教师吸纳本科生参与课题。物信学院有山东省光通信工程技术研究中心等平台。" },
+  { kw: ["创新学分", "学分"], ans: "参加竞赛、科研项目、发表论文可申请创新学分。最多冲抵8个公选课学分。评优、奖学金、推免时同等条件优先考虑。详见“竞赛与学分”页面。" },
+  { kw: ["C语言", "编程", "Python"], ans: "C语言是大一基础，后续所有编程课的地基。Python和MATLAB在大二学，用于数据处理、信号仿真和人工智能入门。建议早接触、多敲代码。" }
+];
+
+// 2. 交互逻辑
+function toggleAiChat() {
+  const box = document.getElementById('aiChatBox');
+  box.classList.toggle('active');
+}
+
+function sendAiMsg() {
+  const input = document.getElementById('aiInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const body = document.getElementById('aiChatBody');
+  
+  // 显示用户消息
+  body.innerHTML += `<div class="msg user">${text}</div>`;
+  input.value = '';
+  body.scrollTop = body.scrollHeight;
+
+  // 匹配知识库
+  let reply = "抱歉，我是咱们学院专属的学习助手，只回答与聊城大学电子信息工程相关的学习问题哦。你可以问我：保研条件、考研规划、大一怎么学、转专业、竞赛推荐等。";
+  
+  for (let item of AI_KB) {
+    if (item.kw.some(k => text.includes(k))) {
+      reply = item.ans;
+      break;
+    }
+  }
+
+  // 延迟回复，模拟打字
+  setTimeout(() => {
+    body.innerHTML += `<div class="msg bot">${reply}</div>`;
+    body.scrollTop = body.scrollHeight;
+  }, 400);
+}
+</script>
+<!-- ==================== 助手结束 ==================== -->
+</body>
+</html>
